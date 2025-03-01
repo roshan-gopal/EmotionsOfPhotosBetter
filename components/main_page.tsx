@@ -120,7 +120,7 @@ export default function MainPage() {
     setIsVisible(true);
   }, []);
 
-  // @ts-expect-error
+  // @ts-expect-error - Predictions type is complex and partially defined
   //isjs
   const getEmotionsData = (predictions) => {
     if (!predictions?.[0]?.results?.predictions[0]?.models?.face?.groupedPredictions[0]?.predictions[0]?.emotions) {
@@ -128,7 +128,7 @@ export default function MainPage() {
     }
     
     const emotions = predictions[0].results.predictions[0].models.face.groupedPredictions[0].predictions[0].emotions
-      // @ts-expect-error
+      // @ts-expect-error - Predictions type is complex and partially defined
        //isjs
       .map((emotion) => ({
         name: emotion.name,
@@ -184,7 +184,7 @@ export default function MainPage() {
           emotion.name === 'Triumph' ? '#FFE4B5' : // Moccasin
           '#3b82f6' // Default Blue
       }))
-        // @ts-expect-error
+        // @ts-expect-error - Predictions type is complex and partially defined
          //isjs
       .sort((a, b) => b.score - a.score)
       .slice(0, 3);
