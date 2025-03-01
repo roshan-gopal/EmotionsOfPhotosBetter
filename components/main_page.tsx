@@ -14,10 +14,7 @@ interface Emotion {
 }
 
 // Add these interfaces near the top where the Emotion interface is defined
-interface EmotionPrediction {
-  name: string;
-  score: number;
-}
+
 
 /*
 interface Predictions {
@@ -124,6 +121,7 @@ export default function MainPage() {
   }, []);
 
   // @ts-expect-error
+  //isjs
   const getEmotionsData = (predictions) => {
     if (!predictions?.[0]?.results?.predictions[0]?.models?.face?.groupedPredictions[0]?.predictions[0]?.emotions) {
       return [];
@@ -131,6 +129,7 @@ export default function MainPage() {
     
     const emotions = predictions[0].results.predictions[0].models.face.groupedPredictions[0].predictions[0].emotions
       // @ts-expect-error
+       //isjs
       .map((emotion) => ({
         name: emotion.name,
         score: parseFloat((emotion.score * 100).toFixed(1)),
@@ -186,6 +185,7 @@ export default function MainPage() {
           '#3b82f6' // Default Blue
       }))
         // @ts-expect-error
+         //isjs
       .sort((a, b) => b.score - a.score)
       .slice(0, 3);
 
