@@ -1,11 +1,10 @@
 "use client"
 
-import { HumeClient } from 'hume';
 import { useState, useEffect } from 'react';
 import styles from './MainPage.module.css';  // We'll create this next
-import { PlusCircle, ImagePlus } from 'lucide-react';
+import { ImagePlus } from 'lucide-react';
 import { motion } from 'framer-motion';
-import Graph from './graph';
+
 
 // Add this interface near the top of the file with other imports
 interface Emotion { 
@@ -18,9 +17,9 @@ export default function MainPage() {
   const [predictions, setPredictions] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [prediction_final, setPredictionFinal] = useState<any>(null);
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [uploadedImageUrl, setUploadedImageUrl] = useState<string | null>(null);
+
+ 
+  
   const [localImageUrl, setLocalImageUrl] = useState<string | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [progressValues, setProgressValues] = useState<{ [key: string]: number }>({});
@@ -44,11 +43,11 @@ export default function MainPage() {
       
       // Reset states immediately when new file is selected
       setPredictions(null);
-      setPredictionFinal(null);
+ 
       setError(null);
       setLoading(true);
       
-      setSelectedFile(file);
+
       setLocalImageUrl(URL.createObjectURL(file));  // Create local URL for preview
       
       try {
@@ -65,9 +64,9 @@ export default function MainPage() {
         }
 
         const data = await response.json();
-        setUploadedImageUrl(data.url);
+
         setPredictions(data.predictions);
-        setPredictionFinal(JSON.stringify(data.predictions, null, 2));
+        
         setLoading(false);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Upload failed');
