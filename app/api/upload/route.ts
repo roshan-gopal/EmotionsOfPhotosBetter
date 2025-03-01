@@ -109,6 +109,7 @@ export async function POST(request: Request) {
 
     await job.awaitCompletion();
     const predictions = await hume.expressionMeasurement.batch.getJobPredictions(job.jobId);
+    
 
     return NextResponse.json({ 
       url: result.secure_url,

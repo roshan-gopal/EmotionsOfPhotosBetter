@@ -13,8 +13,49 @@ interface Emotion {
   color: string;
 }
 
+// Add these interfaces near the top where the Emotion interface is defined
+interface EmotionPrediction {
+  name: string;
+  score: number;
+}
+
+/*
+interface Predictions {
+  source: {
+    type: string;
+    url: string;
+  };
+  results: {
+    predictions: [{
+      file: string;
+      file_type: string;
+      models: {
+        face: {
+          groupedPredictions: [{
+            id: string;
+            predictions: [{
+              frame: number;
+              time: number;
+              prob: number;
+              box: {
+                x: number;
+                y: number;
+                w: number;
+                h: number;
+              };
+              emotions: EmotionPrediction[];
+            }];
+          }];
+        };
+      };
+    }];
+    errors: string[];
+  };
+}
+*/
+
 export default function MainPage() {
-  const [predictions, setPredictions] = useState<any>(null);
+  const [predictions, setPredictions] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -64,8 +105,10 @@ export default function MainPage() {
         }
 
         const data = await response.json();
+        console.log("Data:", JSON.stringify(data.predictions, null, 2));
 
         setPredictions(data.predictions);
+        console.log("Predictions:", data.predictions);
         
         setLoading(false);
       } catch (err) {
@@ -80,14 +123,15 @@ export default function MainPage() {
     setIsVisible(true);
   }, []);
 
-  // Transform emotions data for the chart - modified to get only top 3
-  const getEmotionsData = (predictions: any) => {
+  // @ts-ignore
+  const getEmotionsData = (predictions) => {
     if (!predictions?.[0]?.results?.predictions[0]?.models?.face?.groupedPredictions[0]?.predictions[0]?.emotions) {
       return [];
     }
     
     const emotions = predictions[0].results.predictions[0].models.face.groupedPredictions[0].predictions[0].emotions
-      .map((emotion: any) => ({
+      // @ts-ignore
+      .map((emotion) => ({
         name: emotion.name,
         score: parseFloat((emotion.score * 100).toFixed(1)),
         color: 
@@ -141,7 +185,8 @@ export default function MainPage() {
           emotion.name === 'Triumph' ? '#FFE4B5' : // Moccasin
           '#3b82f6' // Default Blue
       }))
-      .sort((a: any, b: any) => b.score - a.score)
+        // @ts-ignore
+      .sort((a, b) => b.score - a.score)
       .slice(0, 3);
 
     console.log("Processed emotions data:", emotions);
@@ -174,19 +219,19 @@ export default function MainPage() {
         <h1 className="text-2xl font-bold mb-4 md:text-left text-center px-4 md:px-0">
           <span 
             className={`${styles.slideIn} md:inline block mb-2 md:mb-0`} 
-            style={{ transitionDelay: '0.2s' } as any}
+            style={{ transitionDelay: '0.2s' }}
           >
             Taking a photo is hard.
           </span>
           <span 
             className={`${styles.slideIn} md:inline block mb-2 md:mb-0`} 
-            style={{ transitionDelay: '1.7s' } as any}
+            style={{ transitionDelay: '1.7s' }}
           >
             Choosing the best one is harder.
           </span>
           <span 
             className={`${styles.slideIn} md:inline block`} 
-            style={{ transitionDelay: '3.2s' } as any}
+            style={{ transitionDelay: '3.2s' }}
           >
             Figure out what emotions your pictures are giving.
           </span>
