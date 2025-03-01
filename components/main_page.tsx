@@ -301,7 +301,7 @@ export default function MainPage() {
                         width: '100%'
                       }}
                     >
-                      You're Giving Off...
+                      You&apos;re Giving Off...
                     </h2>
                     
                     <div style={{ 
