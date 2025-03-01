@@ -123,14 +123,14 @@ export default function MainPage() {
     setIsVisible(true);
   }, []);
 
-  // @ts-ignore
+  // @ts-expect-error
   const getEmotionsData = (predictions) => {
     if (!predictions?.[0]?.results?.predictions[0]?.models?.face?.groupedPredictions[0]?.predictions[0]?.emotions) {
       return [];
     }
     
     const emotions = predictions[0].results.predictions[0].models.face.groupedPredictions[0].predictions[0].emotions
-      // @ts-ignore
+      // @ts-expect-error
       .map((emotion) => ({
         name: emotion.name,
         score: parseFloat((emotion.score * 100).toFixed(1)),
@@ -185,7 +185,7 @@ export default function MainPage() {
           emotion.name === 'Triumph' ? '#FFE4B5' : // Moccasin
           '#3b82f6' // Default Blue
       }))
-        // @ts-ignore
+        // @ts-expect-error
       .sort((a, b) => b.score - a.score)
       .slice(0, 3);
 
