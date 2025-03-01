@@ -1,0 +1,425 @@
+.container {
+  position: relative;
+  min-height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  background: linear-gradient(135deg, rgba(66, 135, 245, 0.8) 0%, rgba(245, 66, 233, 0.8) 50%, rgba(255, 134, 66, 0.8) 100%);
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.uploadArea {
+  width: 600px;
+  height: 600px;
+  position: relative;
+  margin: 2rem auto;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.uploadArea:hover {
+  transform: scale(1.05);
+}
+
+.plusCircle {
+  width: 20rem;  /* equivalent to w-20 in Tailwind */
+  height: 20rem; /* equivalent to h-20 in Tailwind */
+  color: black; /* equivalent to text-blue-600 in Tailwind */
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.plusCircle:hover {
+  transform: scale(1.1);
+}
+
+.uploadedImage {
+  width: 600px;
+  height: 450px;
+  object-fit: cover;
+  transform: translateZ(0);
+  will-change: transform;
+  border-radius: 1rem;
+  border: 2px solid rgba(0, 0, 0, 0.5);
+  box-shadow: 
+    0 8px 16px rgba(0, 0, 0, 0.2),
+    0 0 20px rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.uploadedImage:hover {
+  box-shadow: 
+    0 12px 24px rgba(0, 0, 0, 0.25),
+    0 0 30px rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  border: 2px solid rgba(0, 0, 0, 0.6);
+}
+
+.slideIn {
+  opacity: 0;
+  display: block;
+  margin-bottom: 1rem;
+  transition: opacity 0.8s ease;
+  padding: 0.5rem;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 300;
+  color: white;
+  font-size: 1.8rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.visible .slideIn {
+  opacity: 1;
+}
+
+.slideIn:hover {
+  transform: none;
+  cursor: default;
+}
+
+.haringFigure {
+  opacity: 0;
+  transform: translateX(-300px);
+  display: inline-block;
+  margin-right: 1rem;
+  width: 50px;
+  height: 50px;
+}
+
+.visible .haringFigure {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.textWithFigure {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.textBall {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  animation: float 15s ease-in-out infinite;
+  opacity: 0.2;
+  filter: brightness(0.5);
+  transition: opacity 0.8s ease, filter 0.8s ease;
+}
+
+.visible .textBall {
+  opacity: 0.8;
+  filter: brightness(1.2);
+}
+
+/* Add transition delays for each line */
+.textBall[style*="transitionDelay: 0.2s"] {
+  transition-delay: 0.2s;
+}
+
+.textBall[style*="transitionDelay: 0.6s"] {
+  transition-delay: 0.6s;
+}
+
+.textBall[style*="transitionDelay: 1s"] {
+  transition-delay: 1s;
+}
+
+.spinnerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem 0;
+  gap: 1rem;  /* Add spacing between spinner and text */
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(59, 130, 246, 0.1);
+  border-radius: 50%;
+  border-top-color: #3b82f6;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.hiddenInput {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.initialUploadSection {
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: opacity 0.8s ease;
+  transition-delay: 4.7s;  /* Delay after text animations */
+}
+
+.initialUploadSection.visible {
+  opacity: 1;
+}
+
+.uploadSection {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 1;
+  transition: transform 0.3s ease;
+}
+
+.uploadSection:hover {
+  transform: scale(1.02);
+}
+
+.uploadText {
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 300;
+  color: white;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.analysisLayout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .analysisLayout {
+    gap: 2rem;
+    padding: 1rem;
+  }
+  
+  .uploadedImage {
+    max-height: initial;
+  }
+}
+
+/* Add these new responsive utilities if not already using Tailwind's built-in ones */
+@media (max-width: 767px) {
+  .container {
+    padding: 0.25rem;
+  }
+  
+  .uploadedImage {
+    max-width: 85vw;
+    max-height: 250px;
+    object-fit: contain;
+  }
+
+  .analysisLayout {
+    gap: 0.75rem;
+    padding: 0.25rem;
+  }
+
+  .content {
+    padding: 0.25rem;
+  }
+
+  .analysisSection {
+    transform: translateX(-20px); /* Adjust this value as needed */
+  }
+}
+
+.imageSection {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.analysisSection {
+  padding: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  border-radius: 1rem;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  animation: fadeIn 0.8s ease forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.spinnerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.smallUploadSection {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 1;
+  transition: transform 0.3s ease;
+  width: 100%;
+}
+
+.uploadButton {
+  width: 8rem;
+  height: 8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.uploadButton:hover {
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05);
+}
+
+.smallUploadText {
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 300;
+  color: white;
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Remove or comment out any hover effects that might look like this: */
+/* 
+.recharts-bar-rectangle:hover {
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+*/
+
+/* If there's a global style affecting the bars, you can explicitly disable hover effects: */
+
+
+.analysisTitle {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+/* Add these new utility classes */
+.smallText {
+  font-size: 0.9rem;
+}
+
+.compactSpacing {
+  letter-spacing: 0.1em;
+}
+
+.verticalContainer {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.verticalImage {
+  width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+}
+
+.horizontalImage {
+  width: 600px;
+  height: 450px;
+  object-fit: cover;
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+@media (min-width: 768px) {
+  .verticalContainer {
+    width: 40%;
+    max-width: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .horizontalImage {
+    max-width: 85vw;
+    max-height: 250px;
+    object-fit: contain;
+  }
+}
+
+.loadingText {
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 300;
+  color: white;
+  font-size: 1.0rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
