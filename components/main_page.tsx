@@ -233,7 +233,7 @@ export default function MainPage() {
             className={`${styles.slideIn} md:inline block`} 
             style={{ transitionDelay: '3.2s' }}
           >
-            Figure out what emotions your pictures are giving.
+            Figure out what emotions your photos are giving.
           </span>
         </h1>
         
@@ -296,13 +296,27 @@ export default function MainPage() {
                         textTransform: 'uppercase',
                         textShadow: '1px 1px 2px rgba(0,0,0,0.5)',
                         fontFamily: 'system-ui, -apple-system, sans-serif',
-                        marginBottom: '1rem',
+                        marginBottom: '0.5rem',
                         textAlign: 'center',
                         width: '100%'
                       }}
                     >
                       You&apos;re Giving Off...
                     </h2>
+                    
+                    <p style={{
+                      color: 'white',
+                      fontSize: '0.75rem',
+                      opacity: 0.8,
+                      marginBottom: '1rem',
+                      textAlign: 'center',
+                      fontFamily: 'system-ui, -apple-system, sans-serif',
+                      letterSpacing: '0.1em',
+                      textShadow: '1px 1px 2px rgba(0,0,0,0.5)',
+                      textTransform: 'uppercase'
+                    }}>
+                      tap each bar to learn more
+                    </p>
                     
                     <div style={{ 
                       display: 'flex', 
