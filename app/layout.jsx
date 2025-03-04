@@ -5,6 +5,7 @@ export const metadata = {
     title: 'Niepce',
     description: 'Discover the emotions your photos give',
     type: 'website',
+    siteName: 'Niepce',
     url: 'https://emotions-of-photos-better-final.vercel.app',
     images: [
       {
