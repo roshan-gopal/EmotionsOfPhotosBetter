@@ -1,14 +1,14 @@
 
 
 export const metadata = {
-  title: 'Photo Emotions Analyzer',
-  description: 'Discover the emotions your photos convey using AI analysis',
+  title: 'Niepce',
+  description: 'Discover the emotions your photos give',
   openGraph: {
     title: 'Niepce',
     description: 'Discover the emotions your photos give',
     images: [
       {
-        url: '/niepce.png',
+        url: '/Niepce.png',
         width: 1200,
         height: 630,
         alt: 'Photo Emotions Analyzer Preview',
@@ -21,7 +21,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'Niepce',
     description: 'Discover the emotions your photos give',
-    images: ['/niepce.png'],
+    images: ['/Niepce.png'],
   },
 };
 
